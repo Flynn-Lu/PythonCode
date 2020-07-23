@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head data-suburl="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Explore -  Gitea:简易的私有仓库</title>
+	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+	
+	<script>
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+				
+				console.info('ServiceWorker registration successful with scope: ', registration.scope);
+			}, function(err) {
+				
+				console.info('ServiceWorker registration failed: ', err);
+			});
+		}
+	</script>
+	
+	<meta name="theme-color" content="#6cc644">
+	<meta name="author" content="Gitea - Git with a cup of tea" />
+	<meta name="description" content="Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go" />
+	<meta name="keywords" content="go,git,self-hosted,gitea">
+	<meta name="referrer" content="no-referrer" />
+	<meta name="_csrf" content="K5UMBF8zsy1FfNStXA5R9wvjkug6MTU5NDQ1NTg2MTUxNzA4OTc5MA" />
+	<meta name="_suburl" content="" />
+	
+	
+	
+
+
+	<script>
+	/*
+	@licstart  The following is the entire license notice for the
+        JavaScript code in this page.
+
+	Copyright (c) 2016 The Gitea Authors
+	Copyright (c) 2015 The Gogs Authors
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+	---
+	Licensing information for additional javascript libraries can be found at:
+	  {{StaticUrlPrefix}}/vendor/librejs.html
+
+	@licend  The above is the entire license notice
+        for the JavaScript code in this page.
+	*/
+	</script>
+
+	<link rel="shortcut icon" href="/img/favicon.png" />
+	<link rel="mask-icon" href="/img/gitea-safari.svg" color="#609926">
+	<link rel="preload" href="/vendor/assets/font-awesome/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="/vendor/assets/font-awesome/css/font-awesome.min.css"></noscript>
+	<link rel="stylesheet" href="/vendor/assets/octicons/octicons.min.css">
+
+
+
+
+
+	
+	<link rel="stylesheet" href="/vendor/plugins/fomantic/semantic.min.css?v=39b92f95161468f12c2f6b99b9551458">
+	<link rel="stylesheet" href="/css/index.css?v=39b92f95161468f12c2f6b99b9551458">
+	<noscript>
+		<style>
+			.dropdown:hover > .menu { display: block; }
+			.ui.secondary.menu .dropdown.item > .menu { margin-top: 0; }
+		</style>
+	</noscript>
+
+
+
+
+
+
+	<style class="list-search-style"></style>
+
+	<script src="/vendor/plugins/promise-polyfill/polyfill.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/loadCSS.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/cssrelpreload.min.js"></script>
+
+	<meta property="og:title" content="Gitea:简易的私有仓库">
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="img/gitea-lg.png" />
+	<meta property="og:url" content="http://gitea.boulderh.top/" />
+	<meta property="og:description" content="Gitea (Git with a cup of tea) is a painless self-hosted Git service written in Go">
+
+<meta property="og:site_name" content="Gitea:简易的私有仓库" />
+
+
+</head>
+<body>
+	
+
+	<div class="full height">
+		<noscript>This website works better with JavaScript.</noscript>
+
+		
+
+		
+			<div class="ui top secondary stackable main menu following bar light">
+				<div class="ui container" id="navbar">
+	<div class="item brand" style="justify-content: space-between;">
+		<a href="/">
+			<img class="ui mini image" src="/img/gitea-sm.png">
+		</a>
+		<div class="ui basic icon button mobile-only" id="navbar-expand-toggle">
+			<i class="sidebar icon"></i>
+		</div>
+	</div>
+
+	
+		<a class="item " href="/">Home</a>
+		<a class="item active" href="/explore/repos">Explore</a>
+	
+
+	
+
+	
+
+	
+
+		<a class="item" target="_blank" rel="noopener noreferrer" href="https://docs.gitea.io">Help</a>
+		<div class="right stackable menu">
+			
+				<a class="item" href="/user/sign_up">
+					<i class="octicon octicon-person"></i> Register
+				</a>
+			
+			<a class="item" rel="nofollow" href="/user/login?redirect_to=%2fexplore%2frepos">
+				<i class="octicon octicon-sign-in"></i> Sign In
+			</a>
+		</div>
+
+	
+</div>
+
+			</div>
+		
+
+
+<div class="explore repositories">
+	<div class="ui secondary pointing tabular top attached borderless stackable menu navbar">
+	<a class="active item" href="/explore/repos">
+		<span class="octicon octicon-repo"></span> Repositories
+	</a>
+	<a class=" item" href="/explore/users">
+		<span class="octicon octicon-person"></span> Users
+	</a>
+	<a class=" item" href="/explore/organizations">
+		<span class="octicon octicon-organization"></span> Organizations
+	</a>
+	
+</div>
+
+	<div class="ui container">
+		<div class="ui right floated secondary filter menu">
+    
+    <div class="ui right dropdown type jump item">
+		<span class="text">
+			Sort
+                <i class="dropdown icon"></i>
+		</span>
+        <div class="menu">
+            <a class=" item" href="/explore/repos?sort=newest&q=&tab=">Newest</a>
+            <a class=" item" href="/explore/repos?sort=oldest&q=&tab=">Oldest</a>
+            <a class=" item" href="/explore/repos?sort=alphabetically&q=&tab=">Alphabetically</a>
+            <a class=" item" href="/explore/repos?sort=reversealphabetically&q=&tab=">Reverse alphabetically</a>
+            <a class="active item" href="/explore/repos?sort=recentupdate&q=&tab=">Recently updated</a>
+            <a class=" item" href="/explore/repos?sort=leastupdate&q=&tab=">Least recently updated</a>
+            <a class=" item" href="/explore/repos?sort=moststars&q=&tab=">Most stars</a>
+            <a class=" item" href="/explore/repos?sort=feweststars&q=&tab=">Fewest stars</a>
+            <a class=" item" href="/explore/repos?sort=mostforks&q=&tab=">Most forks</a>
+            <a class=" item" href="/explore/repos?sort=fewestforks&q=&tab=">Fewest forks</a>
+        </div>
+    </div>
+</div>
+<form class="ui form ignore-dirty" style="max-width: 90%">
+    <div class="ui fluid action input">
+        <input name="q" value="" placeholder="Search..." autofocus>
+        <input type="hidden" name="tab" value="">
+        <input type="hidden" name="sort" value="recentupdate">
+        <button class="ui blue button">Search</button>
+    </div>
+</form>
+<div class="ui divider"></div>
+
+		<div class="ui repository list">
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/CYC/git-py">
+					CYC / git-py
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">180801105崔禹超</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 23:11:07 CST">17 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/bkc/pycode">
+					bkc / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">180801201鲍凯辰</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 22:35:15 CST">17 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/171605129/zb970629">
+					171605129 / zb970629
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">171605129  朱博 </p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 22:15:24 CST">18 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/Yuyake/pycode">
+					Yuyake / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170801116芮一凡</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 22:03:52 CST">18 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/K_/pycode">
+					K_ / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">赵泽坤</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 21:24:29 CST">18 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/175260202/pycode">
+					175260202 / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">查宇凡</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 20:01:28 CST">20 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/Shaoye/PyCode">
+					Shaoye / PyCode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">171604327殷俊凡</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 19:55:36 CST">20 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/175260201z/pycode">
+					175260201z / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">175260201曾郅超</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 19:52:34 CST">20 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/170801111lrc/pycode">
+					170801111lrc / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170801111李若尘</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 19:28:21 CST">20 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/lin/bhz">
+					lin / bhz
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">林家杰</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 19:21:59 CST">21 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/narutotenten/pycode">
+					narutotenten / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">孙天驰</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 18:19:57 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/pink/summer_practice">
+					pink / summer_practice
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 2</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">马素雪</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 18:09:12 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/170350401cy/PyCode">
+					170350401cy / PyCode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170350401蔡勇</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 18:02:04 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/Solitude/pycode">
+					Solitude / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170801423杨丽芬</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 17:48:30 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/xuke/pycode">
+					xuke / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170801222许轲</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 17:37:47 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/175260313lzw/175260313lzw">
+					175260313lzw / 175260313lzw
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">175260313罗志伟</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 17:24:26 CST">22 hours ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/gumendol/pycode">
+					gumendol / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">L170801301 GUMELAR PURNAMA NUGRAHA</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 13:18:05 CST">1 day ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/MaxwellRailGun/pycode">
+					MaxwellRailGun / pycode
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">1808013班 180404117 孙浩铭</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 12:50:28 CST">1 day ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/454618365/170403216Python">
+					454618365 / 170403216Python
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">170403216王皓</p>
+				
+				<p class="time">Updated <span class="time-since" title="Fri, 10 Jul 2020 09:28:54 CST">1 day ago</span></p>
+			</div>
+		</div>
+	
+		<div class="item">
+			<div class="ui header">
+				
+				<a class="name" href="/175260420wjy/chen">
+					175260420wjy / chen
+					
+				</a>
+				
+					
+				
+				<div class="ui right metas">
+					<span class="text grey"><i class="octicon octicon-star"></i> 0</span>
+					<span class="text grey"><i class="octicon octicon-git-branch"></i> 0</span>
+				</div>
+			</div>
+			<div class="description">
+				<p class="has-emoji">王婧妍</p>
+				
+				<p class="time">Updated <span class="time-since" title="Thu, 09 Jul 2020 23:35:26 CST">1 day ago</span></p>
+			</div>
+		</div>
+	
+</div>
+
+		
+
+	
+		<div class="center page buttons">
+			<div class="ui borderless pagination menu">
+				<a class=" item navigation" href="/explore/repos?sort=recentupdate&amp;q=&amp;topic=false"><i class="angle double left icon"></i><span class="navigation_label">&nbsp;First</span></a>
+				<a class=" item navigation" href="/explore/repos?page=1&sort=recentupdate&amp;q=&amp;topic=false">
+					<i class="left arrow icon"></i><span class="navigation_label">&nbsp;Previous</span>
+				</a>
+				
+					
+						<a class=" item" href="/explore/repos?page=1&sort=recentupdate&amp;q=&amp;topic=false">1</a>
+					
+				
+					
+						<a class="active item" >2</a>
+					
+				
+					
+						<a class=" item" href="/explore/repos?page=3&sort=recentupdate&amp;q=&amp;topic=false">3</a>
+					
+				
+					
+						<a class=" item" href="/explore/repos?page=4&sort=recentupdate&amp;q=&amp;topic=false">4</a>
+					
+				
+				<a class=" item navigation" href="/explore/repos?page=3&sort=recentupdate&amp;q=&amp;topic=false">
+					<span class="navigation_label">Next&nbsp;</span><i class="icon right arrow"></i>
+				</a>
+				<a class=" item navigation" href="/explore/repos?page=4&sort=recentupdate&amp;q=&amp;topic=false"><span class="navigation_label">Last&nbsp;</span><i class="angle double right icon"></i></a>
+			</div>
+		</div>
+	
+
+
+	</div>
+</div>
+
+
+	
+
+	</div>
+
+	
+
+	<footer>
+	<div class="ui container">
+		<div class="ui left">
+			Powered by Gitea Version: 1.11.0 Page: <strong>26ms</strong> Template: <strong>14ms</strong>
+		</div>
+		<div class="ui right links">
+			
+			<div class="ui language bottom floating slide up dropdown link item">
+				<i class="world icon"></i>
+				<div class="text">English</div>
+				<div class="menu">
+					
+						<a lang="en-US" class="item active selected" href="#">English</a>
+					
+						<a lang="zh-CN" class="item " href="/explore/repos?lang=zh-CN">简体中文</a>
+					
+						<a lang="zh-HK" class="item " href="/explore/repos?lang=zh-HK">繁體中文（香港）</a>
+					
+						<a lang="zh-TW" class="item " href="/explore/repos?lang=zh-TW">繁體中文（台灣）</a>
+					
+						<a lang="de-DE" class="item " href="/explore/repos?lang=de-DE">Deutsch</a>
+					
+						<a lang="fr-FR" class="item " href="/explore/repos?lang=fr-FR">français</a>
+					
+						<a lang="nl-NL" class="item " href="/explore/repos?lang=nl-NL">Nederlands</a>
+					
+						<a lang="lv-LV" class="item " href="/explore/repos?lang=lv-LV">latviešu</a>
+					
+						<a lang="ru-RU" class="item " href="/explore/repos?lang=ru-RU">русский</a>
+					
+						<a lang="uk-UA" class="item " href="/explore/repos?lang=uk-UA">Українська</a>
+					
+						<a lang="ja-JP" class="item " href="/explore/repos?lang=ja-JP">日本語</a>
+					
+						<a lang="es-ES" class="item " href="/explore/repos?lang=es-ES">español</a>
+					
+						<a lang="pt-BR" class="item " href="/explore/repos?lang=pt-BR">português do Brasil</a>
+					
+						<a lang="pl-PL" class="item " href="/explore/repos?lang=pl-PL">polski</a>
+					
+						<a lang="bg-BG" class="item " href="/explore/repos?lang=bg-BG">български</a>
+					
+						<a lang="it-IT" class="item " href="/explore/repos?lang=it-IT">italiano</a>
+					
+						<a lang="fi-FI" class="item " href="/explore/repos?lang=fi-FI">suomi</a>
+					
+						<a lang="tr-TR" class="item " href="/explore/repos?lang=tr-TR">Türkçe</a>
+					
+						<a lang="cs-CZ" class="item " href="/explore/repos?lang=cs-CZ">čeština</a>
+					
+						<a lang="sr-SP" class="item " href="/explore/repos?lang=sr-SP">српски</a>
+					
+						<a lang="sv-SE" class="item " href="/explore/repos?lang=sv-SE">svenska</a>
+					
+						<a lang="ko-KR" class="item " href="/explore/repos?lang=ko-KR">한국어</a>
+					
+				</div>
+			</div>
+			<a href="/vendor/librejs.html" data-jslicense="1">JavaScript licenses</a>
+			<a href="/api/swagger">API</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://gitea.io">Website</a>
+			
+			<span class="version">Go1.13.7</span>
+		</div>
+	</div>
+</footer>
+
+
+	<script src="/vendor/plugins/jquery/jquery.min.js?v=3.4.1"></script>
+	<script src="/vendor/plugins/jquery-migrate/jquery-migrate.min.js?v=3.0.1"></script>
+	<script src="/vendor/plugins/jquery.areyousure/jquery.are-you-sure.js"></script>
+
+
+
+
+
+
+
+
+
+
+	<script src="/vendor/plugins/emojify/emojify.custom.js"></script>
+	<script src="/vendor/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/vendor/plugins/vue/vue.min.js"></script>
+
+	
+	<script src="/vendor/plugins/fomantic/semantic.min.js?v=39b92f95161468f12c2f6b99b9551458"></script>
+	<script src="/js/index.js?v=39b92f95161468f12c2f6b99b9551458"></script>
+
+
+</body>
+</html>
+
